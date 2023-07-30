@@ -4,16 +4,7 @@
         <form>
 
             <!-- <label>Select a category</label> -->
-            <BaseSelect 
-            v-model="event.category"
-            label="Select a category"
-            :options="categories"
-            />
-            <!-- <select >
-                <option v-for="option in categories" :value="option" :key="option" :selected="option === event.category">{{
-                    option }}</option>
-            </select> -->
-
+            <BaseSelect v-model="event.category" label="Select a category" :options="categories" />
             <h3>Name & describe your event</h3>
 
             <BaseInput v-model="event.title" label="Full name" type="text" />
@@ -22,23 +13,22 @@
 
             <h3>Where is your event?</h3>
             <BaseInput v-model="event.location" type="text" label="Location" />
-
-
-            <div>
+            <div>{
                 <p>Name: {{ event.title }}</p>
                 <p>description: {{ event.description }}</p>
                 <p>Location: {{ event.location }}</p>
                 <p>Category: {{ event.category }}</p>
+                <p>Pet Allowed?: <span v-if="event.pets">Yes</span> <span v-else>No</span></p>
+                <br>
+                }
             </div>
             <h3>Are pets allowed?</h3>
             <div>
-                <input type="radio" v-model="event.pets" :value="1" name="pets" />
-                <label>Yes</label>
+                <BaseInput v-model="event.pets" type="radio" :value="1" label="Yes" name="pets" />
             </div>
 
             <div>
-                <input type="radio" v-model="event.pets" :value="0" name="pets" />
-                <label>No</label>
+                <BaseInput v-model="event.pets" type="radio" :value="0" label="No" name="pets" />
             </div>
 
             <h3>Extras</h3>
@@ -82,7 +72,8 @@ export default {
                 extras: {
                     catering: false,
                     music: false
-                }
+                },
+                acceptedExtras:[]
             }
         };
     },
